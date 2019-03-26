@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import '../App.css';
 import { Header } from "./common/Header";
 import { Footer } from './common/Footer';
+import { UsersPage } from './feed/UsersPage';
 
 class App extends Component {
   render() {
@@ -10,7 +11,7 @@ class App extends Component {
       <>
         <Header />
         <main className="content">
-          text
+          <UsersPage />
         </main>
         <Footer />
       </>
