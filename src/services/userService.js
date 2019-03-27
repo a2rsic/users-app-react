@@ -23,12 +23,19 @@ const fetchUser = (id) => {
         .then(response => response.json())
         .then(data => {
             return new User(data)
-        }
+        })
+}
 
-        )
+const deleteUser = (id) => {
+    const deleteUrl = `${BASE_URL}/users/${id}`;
+
+    return fetch(deleteUrl, {
+        method: "DELETE",
+    })
 }
 
 export {
     fetchUsers,
-    fetchUser
+    fetchUser,
+    deleteUser
 }

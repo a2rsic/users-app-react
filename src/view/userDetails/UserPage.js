@@ -26,6 +26,14 @@ class UserPage extends Component {
         this.fetchUser()
     }
 
+    deleteUser = () => {
+        const userId = this.props.match.params.id
+        userService.deleteUser(userId)
+            .then((response) => {
+                this.props.history.push("/")
+            })
+
+    }
     render() {
         const { user } = this.state;
         if (!user) {
@@ -33,7 +41,7 @@ class UserPage extends Component {
         }
         console.log("USER", user);
         return (
-            <UserDetails user={user} />
+            <UserDetails user={user} onDeleteUser={this.deleteUser} />
         )
     }
 }

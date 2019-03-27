@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const UserDetails = (props) => {
-    const { user } = props;
+    const { user, onDeleteUser } = props;
     console.log("us", user);
     const { id, email, name, address } = user;
     return (
@@ -21,8 +21,8 @@ const UserDetails = (props) => {
                 </div>
             </div>
 
-            <Link to="/users/edit" className="btn waves-effect waves-light btn-small red">Delete</Link>
-            <button className="btn waves-effect waves-light btn-small">Edit</button>
+            <button onClick={onDeleteUser} className="btn waves-effect waves-light btn-small">Delete</button>
+            <Link to="/users/edit" className="btn waves-effect waves-light btn-small red">Edit</Link>
         </>
     )
 }
