@@ -7,7 +7,7 @@ import { UsersPageItem } from "./UsersPageItem";
 class UsersPage extends Component {
     constructor(props) {
         super(props)
-        this.State = {
+        this.state = {
             users: []
         }
     }
@@ -19,7 +19,6 @@ class UsersPage extends Component {
                     users
                 })
                 console.log("USERS", this.state.users);
-
             })
     }
 
@@ -37,28 +36,31 @@ class UsersPage extends Component {
 
 
     render() {
-        // if (!this.state.users) {
-        //     return <h2>Loading...</h2>
-        // }
-        // const { users } = this.state;
-        // console.log("U", this.state.users);
 
+        const { users } = this.state;
 
         return (
-            <div className="container">
-                <button className="create-button">Create User</button>
-                <table className="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th scope="col">Users</th>
-                            <th scope="col">ID</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">City</th>
-                        </tr>
-                    </thead>
-                    {/* {this.displayUsers(users)} */}
-                </table >
-            </div>
+            <>
+                <div className="card-panel">
+                    <table className="responsive-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>City</th>
+                            </tr>
+                        </thead>
+                        {this.displayUsers(users)}
+                    </table>
+                </div>
+                <div class="fixed-action-btn">
+                    <a class="btn-floating btn-large red">
+                        <i class="large material-icons">mode_edit</i>
+                    </a>
+                </div>
+
+            </>
         )
     }
 }

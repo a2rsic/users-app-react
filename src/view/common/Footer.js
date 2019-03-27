@@ -1,12 +1,13 @@
 import React from "react";
 
-import "./Footer.css";
 
 const Footer = () => {
     return (
-        <footer>
-            <div className="footer-container">
-                <p className="footer-text">Copyright Text</p>
+        <footer className="page-footer">
+            <div className="footer-copyright">
+                <div className="container">
+                    © 2019 Copyright Text
+                </div>
             </div>
         </footer>
     )

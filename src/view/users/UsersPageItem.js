@@ -5,16 +5,14 @@ const UsersPageItem = (props) => {
     const { user } = props;
     const { id, name, email, address } = user;
     return (
-
         <tbody>
             <tr>
-                <Link to="/user"><th scope="row">{name}</th></Link>
                 <td>{id}</td>
+                <td scope="row"><Link to={`/users/${id}`}>{name}</Link></td>
                 <td>{email}</td>
                 <td>{address.city}</td>
             </tr>
         </tbody>
-
     )
 }
 

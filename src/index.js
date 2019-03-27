@@ -4,6 +4,8 @@ import { BrowserRouter } from "react-router-dom";
 
 
 import './index.css';
+import "materialize-css/dist/css/materialize.min.css";
+
 import App from '././view/App';
 import * as serviceWorker from './serviceWorker';
 
