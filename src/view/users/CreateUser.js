@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import * as userService from "../../services/userService";
+import { UserForm } from "./UserForm";
 
 class CreateUser extends Component {
     constructor(props) {
@@ -7,6 +9,15 @@ class CreateUser extends Component {
 
         }
     }
+    createUser = (body) => {
+        userService.createUser(body)
+            .then((user) => {
+                console.log("new", user);
+                this.props.history.push("/")
+            })
+    }
+
+
     render() {
         return (
             <>
@@ -18,23 +29,9 @@ class CreateUser extends Component {
                         <h5>Enter user details</h5>
                     </div>
                     <div className="row">
-                        <form className="col s12">
-                            <div className="row">
-                                <div className="input-field col s12">
-                                    <input id="name" type="text" className="validate" />
-                                    <label htmlFor="password">Name</label>
-                                </div>
-                            </div>
-                            <div className="row">
-                                <div className="input-field col s12">
-                                    <input id="email" type="email" className="validate" />
-                                    <label htmlFor="email">Email</label>
-                                </div>
-                            </div>
-                        </form>
+                        <UserForm onUserCreate={this.createUser} />
                     </div>
                 </div>
-                <button className="btn">Create</button>
             </>
         )
     }

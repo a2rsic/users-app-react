@@ -34,8 +34,38 @@ const deleteUser = (id) => {
     })
 }
 
+const createUser = (body) => {
+    const createUserUrl = `${BASE_URL}/users`;
+
+    return fetch(createUserUrl, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body)
+    })
+        .then(response => response.json())
+}
+
+const updateUser = (id, body) => {
+    const editUserUrl = `${BASE_URL}/users/${id}`;
+
+    return fetch(editUserUrl, {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body)
+
+    })
+        .then(response => response.json())
+
+}
+
 export {
     fetchUsers,
     fetchUser,
-    deleteUser
+    deleteUser,
+    createUser,
+    updateUser
 }

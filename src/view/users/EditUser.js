@@ -1,35 +1,57 @@
 import React, { Component } from "react";
 
-const EditUser = () => {
-    return (
-        <>
-            <div className="row">
-                <h4>Edit user</h4>
-            </div>
-            <div className="card-panel">
+import { UserForm } from "./UserForm";
+import * as userService from "../../services/userService";
+
+
+class EditUser extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            user: null
+        }
+    }
+
+    componentDidMount() {
+        const id = this.props.match.params.id;
+        userService.fetchUser(id)
+            .then((user) => {
+                this.setState({
+                    user
+                });
+            })
+    }
+
+
+    updateUser = (body) => {
+        const id = this.props.match.params.id;
+        userService.updateUser(id, body)
+            .then(user => {
+                this.props.history.push("/")
+            })
+    }
+
+
+
+
+    render() {
+        const { user } = this.state;
+        return (
+            <>
                 <div className="row">
-                    <h5>Edit user details</h5>
+                    <h4>Edit user</h4>
                 </div>
-                <div className="row">
-                    <form className="col s12">
-                        <div className="row">
-                            <div className="input-field col s12">
-                                <input id="name" type="text" className="validate" />
-                                <label htmlFor="password">Name</label>
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="input-field col s12">
-                                <input id="email" type="email" className="validate" />
-                                <label htmlFor="email">Email</label>
-                            </div>
-                        </div>
-                    </form>
+                <div className="card-panel">
+                    <div className="row">
+                        <h5>Edit user details</h5>
+                    </div>
+                    <div className="row">
+                        <UserForm user={user} onUserUpdate={this.updateUser} />
+                    </div>
                 </div>
-            </div>
-            <button className="btn">Create</button>
-        </>
-    )
+            </>
+        )
+    }
 }
 
 export {

@@ -22,7 +22,7 @@ const UserDetails = (props) => {
             </div>
 
             <button onClick={onDeleteUser} className="btn waves-effect waves-light btn-small">Delete</button>
-            <Link to="/users/edit" className="btn waves-effect waves-light btn-small red">Edit</Link>
+            <Link to={`/users/${id}/edit`} className="btn waves-effect waves-light btn-small red">Edit</Link>
         </>
     )
 }
