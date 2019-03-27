@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 import "./UsersPage.css";
 import * as userService from "../../services/userService";
@@ -54,10 +55,10 @@ class UsersPage extends Component {
                         {this.displayUsers(users)}
                     </table>
                 </div>
-                <div class="fixed-action-btn">
-                    <a class="btn-floating btn-large red">
-                        <i class="large material-icons">mode_edit</i>
-                    </a>
+                <div className="fixed-action-btn">
+                    <Link to="users/create" className="btn-floating btn-large red">
+                        <i className="large material-icons">+</i>
+                    </Link>
                 </div>
 
             </>

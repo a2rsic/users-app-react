@@ -6,6 +6,7 @@ import { Header } from "./common/Header";
 import { Footer } from './common/Footer';
 import { UsersPage } from './users/UsersPage';
 import { UserPage } from './userDetails/UserPage';
+import { CreateUser } from './users/CreateUser';
 
 class App extends Component {
   render() {
@@ -14,6 +15,7 @@ class App extends Component {
         <Header />
         <main className="container">
           <Switch>
+            <Route path="/users/create" component={CreateUser} />
             <Route path="/users/:id" component={UserPage} />
             <Route path="/" component={UsersPage} />
           </Switch>

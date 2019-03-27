@@ -6,7 +6,7 @@ import { UserDetails } from "./UserDetails";
 class UserPage extends Component {
     constructor(props) {
         super(props)
-        this.setState = {
+        this.state = {
             user: null
         }
     }
@@ -14,11 +14,11 @@ class UserPage extends Component {
     fetchUser = () => {
         const userId = this.props.match.params.id
         userService.fetchUser(userId)
-        // .then(user => {
-        //     this.setState({
-        //         user
-        //     })
-        // })
+            .then(user => {
+                this.setState({
+                    user
+                })
+            })
 
     }
 
@@ -27,8 +27,13 @@ class UserPage extends Component {
     }
 
     render() {
+        const { user } = this.state;
+        if (!user) {
+            return <h2>loading...</h2>
+        }
+        console.log("USER", user);
         return (
-            <UserDetails />
+            <UserDetails user={user} />
         )
     }
 }

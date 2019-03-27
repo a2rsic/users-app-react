@@ -1,0 +1,17 @@
+.card {
+    margin-top: 50px;
+}
+
+.btn {
+    float: right;
+    margin: 5px;
+}
+
+#user-name {
+    font-size: 2em;
+}
+
+.user-details {
+    font-size: 1.2em;
+    padding: 5px;
+}
