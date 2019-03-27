@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const UsersPageItem = (props) => {
     const { user } = props;
@@ -7,7 +8,7 @@ const UsersPageItem = (props) => {
 
         <tbody>
             <tr>
-                <a href="/user"><th scope="row">{name}</th></a>
+                <Link to="/user"><th scope="row">{name}</th></Link>
                 <td>{id}</td>
                 <td>{email}</td>
                 <td>{address.city}</td>
