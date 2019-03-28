@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import * as userService from "../../services/userService";
 import { UserForm } from "./UserForm";
+import { Loader } from "../loader/Loader";
 
 class CreateUser extends Component {
     constructor(props) {
@@ -11,14 +12,21 @@ class CreateUser extends Component {
     }
 
     createUser = (body) => {
+        this.setState({
+            isCreating: true
+        });
         userService.createUser(body)
             .then((user) => {
                 this.props.history.push("/")
             })
     }
 
-
     render() {
+        const { isCreating } = this.state;
+
+        if (isCreating) {
+            return <Loader text={"Creating user..."} />
+        }
         return (
             <>
                 <div className="row">

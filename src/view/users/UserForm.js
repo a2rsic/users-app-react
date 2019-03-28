@@ -32,7 +32,6 @@ class UserForm extends Component {
     onInputChange = (e) => {
         const { name, value } = e.target;
 
-
         const error = {
             ...this.state.error,
             [name]: this.validateInput(name, value)
