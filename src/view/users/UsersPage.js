@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import "./UsersPage.css";
 import * as userService from "../../services/userService";
 import { UsersPageItem } from "./UsersPageItem";
+import { Loader } from "../loader/Loader";
 
 class UsersPage extends Component {
     constructor(props) {
@@ -27,18 +28,28 @@ class UsersPage extends Component {
         this.fetchUsers()
     }
 
-    displayUsers = (users) => {
+    renderUsers = (users) => {
         const usersList = users.map(user => {
             return <UsersPageItem user={user} key={user.id} />
         })
         return usersList;
     }
 
-
+    renderLoading = () => {
+        return (
+            <>
+                <Loader />
+                <h5 className="center-align">Loading users...</h5>
+            </>
+        )
+    }
 
     render() {
-
         const { users } = this.state;
+
+        if (users.length === 0) {
+            return this.renderLoading()
+        }
 
         return (
             <>
@@ -52,12 +63,12 @@ class UsersPage extends Component {
                                 <th>City</th>
                             </tr>
                         </thead>
-                        {this.displayUsers(users)}
+                        {this.renderUsers(users)}
                     </table>
                 </div>
                 <div className="fixed-action-btn">
-                    <Link to="users/create" className="btn-floating btn-large red">
-                        <i className="large material-icons">+</i>
+                    <Link to="users/create" className="btn-floating btn-large blue">
+                        <i className="large material-icons">add</i>
                     </Link>
                 </div>
 

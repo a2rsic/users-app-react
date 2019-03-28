@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 
 const UserDetails = (props) => {
     const { user, onDeleteUser } = props;
-    console.log("us", user);
     const { id, email, name, address } = user;
+
     return (
         <>
             <div className="card">
@@ -21,8 +21,8 @@ const UserDetails = (props) => {
                 </div>
             </div>
 
-            <button onClick={onDeleteUser} className="btn waves-effect waves-light btn-small">Delete</button>
-            <Link to={`/users/${id}/edit`} className="btn waves-effect waves-light btn-small red">Edit</Link>
+            <button onClick={onDeleteUser} className="btn waves-effect waves-light btn-small red">Delete</button>
+            <Link to={`/users/${id}/edit`} className="btn waves-effect waves-light btn-small">Edit</Link>
         </>
     )
 }
