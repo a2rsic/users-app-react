@@ -20,7 +20,6 @@ class UsersPage extends Component {
                 this.setState({
                     users
                 })
-                console.log("USERS", this.state.users);
             })
     }
 
@@ -35,20 +34,11 @@ class UsersPage extends Component {
         return usersList;
     }
 
-    renderLoading = () => {
-        return (
-            <>
-                <Loader />
-                <h5 className="center-align">Loading users...</h5>
-            </>
-        )
-    }
-
     render() {
         const { users } = this.state;
 
         if (users.length === 0) {
-            return this.renderLoading()
+            return <Loader text={"Loading users..."} />
         }
 
         return (

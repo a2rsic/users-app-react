@@ -8,7 +8,7 @@ const UsersPageItem = (props) => {
         <tbody>
             <tr>
                 <td>{id}</td>
-                <td scope="row"><Link to={`/users/${id}`}>{name}</Link></td>
+                <td><Link to={`/users/${id}`}>{name}</Link></td>
                 <td>{email}</td>
                 <td>{address.city}</td>
             </tr>

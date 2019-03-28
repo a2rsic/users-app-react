@@ -9,10 +9,10 @@ class CreateUser extends Component {
 
         }
     }
+
     createUser = (body) => {
         userService.createUser(body)
             .then((user) => {
-                console.log("new", user);
                 this.props.history.push("/")
             })
     }

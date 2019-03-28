@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { emailValid } from "../../shared/helpers";
 
 class UserForm extends Component {
     constructor(props) {
@@ -76,7 +77,7 @@ class UserForm extends Component {
 
         if (email.length < 3 || email.length > 30) {
             error = "Email must be between 3 anf 30 charachters"
-        } else if (!email.includes("@")) {
+        } else if (!emailValid(email)) {
             error = "Invalid email format"
         }
 
@@ -137,6 +138,7 @@ class UserForm extends Component {
                             id="name"
                             type="text"
                             className="validate" />
+                        <span className="helper-text" data-error="wrong" data-success="right">Name</span>
                         {error.name && <h6 className="error red-text">{error.name}</h6>}
                     </div>
                 </div>
@@ -151,6 +153,7 @@ class UserForm extends Component {
                             name="email"
                             type="email"
                             className="validate" />
+                        <span className="helper-text" data-error="wrong" data-success="right">Email</span>
                         {error.email && <h6 className="error red-text">{error.email}</h6>}
                     </div>
                 </div>

@@ -7,7 +7,6 @@ const fetchUsers = () => {
     return fetch(usersUrl)
         .then(response => response.json())
         .then(data => {
-            console.log("data", data);
             const users = data.map(user => {
                 const { id, name, email, address } = user;
                 return new User({ id, name, email, address })

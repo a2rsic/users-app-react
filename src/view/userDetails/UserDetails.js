@@ -7,22 +7,43 @@ const UserDetails = (props) => {
 
     return (
         <>
-            <div className="card">
-                <div className="card-content grey lighten-4">
-                    <div id="user-name">{name}</div>
+            <div className="row">
+                <div className="input-field col s6">
+                    <h5>User details | ID: {id}</h5>
                 </div>
-                <div className="card-content">
-                    <p className="user-details"><b>ID:</b> {id}</p>
-                    <p className="user-details"><b>Email:</b> {email}</p>
-                    <p className="user-details"><b>Street:</b> {address.street}</p>
-                    <p className="user-details"><b>City:</b> {address.city}</p>
-                    <p className="user-details"><b>ZIP:</b> {address.zipcode}</p>
-
+                <div className="input-field col s6">
+                    <button onClick={onDeleteUser} className="btn waves-effect waves-light btn-small red">Delete</button>
+                    <Link to={`/users/${id}/edit`} className="btn waves-effect waves-light btn-small">Edit</Link>
                 </div>
             </div>
-
-            <button onClick={onDeleteUser} className="btn waves-effect waves-light btn-small red">Delete</button>
-            <Link to={`/users/${id}/edit`} className="btn waves-effect waves-light btn-small">Edit</Link>
+            <div className="card-panel">
+                <div className="row">
+                    <form className="col s12">
+                        <div className="row">
+                            <div className="input-field col s6">
+                                <input disabled id="name" type="text" className="validate" value={name} />
+                                <span className="helper-text" data-error="wrong" data-success="right">Name</span>
+                            </div>
+                            <div className="input-field col s6">
+                                <input disabled id="email" type="email" className="validate" value={email} />
+                                <span className="helper-text" data-error="wrong" data-success="right">Email</span>
+                            </div>
+                            <div className="input-field col s6">
+                                <input disabled id="city" type="text" className="validate" value={address.city} />
+                                <span className="helper-text" data-error="wrong" data-success="right">City</span>
+                            </div>
+                            <div className="input-field col s6">
+                                <input disabled id="street" type="text" className="validate" value={address.street} />
+                                <span className="helper-text" data-error="wrong" data-success="right">Street</span>
+                            </div>
+                            <div className="input-field col s6">
+                                <input disabled id="ZIP" type="text" className="validate" value={address.zipcode} />
+                                <span className="helper-text" data-error="wrong" data-success="right">ZIP</span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </>
     )
 }
@@ -30,3 +51,4 @@ const UserDetails = (props) => {
 export {
     UserDetails
 }
+

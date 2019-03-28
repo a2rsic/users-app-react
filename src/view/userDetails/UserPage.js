@@ -22,7 +22,8 @@ class UserPage extends Component {
         userService.fetchUser(userId)
             .then(user => {
                 this.setState({
-                    user
+                    user,
+                    isDeleting: false
                 })
             })
 
@@ -39,22 +40,15 @@ class UserPage extends Component {
             })
     }
 
-    renderLoading = (text) => (
-        <>
-            <Loader />
-            <h5 className="center-align">{text}</h5>
-        </>
-    )
-
     render() {
         const { user, isDeleting } = this.state;
 
         if (isDeleting) {
-            return this.renderLoading("Deleting user")
+            return <Loader text={`Deleting user ${user.name}`} />
         }
 
         if (!user) {
-            return this.renderLoading("Loading user details...")
+            return < Loader text={"Loading user details..."} />
         }
 
         return (

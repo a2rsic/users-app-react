@@ -2,6 +2,7 @@ import React, { Component } from "react";
 
 import { UserForm } from "./UserForm";
 import * as userService from "../../services/userService";
+import { Loader } from "../loader/Loader";
 
 
 class EditUser extends Component {
@@ -24,6 +25,9 @@ class EditUser extends Component {
 
     updateUser = (body) => {
         const id = this.props.match.params.id;
+        this.setState({
+            isUpdating: true
+        });
         userService.updateUser(id, body)
             .then(user => {
                 this.props.history.push("/")
@@ -31,7 +35,11 @@ class EditUser extends Component {
     }
 
     render() {
-        const { user } = this.state;
+        const { user, isUpdating } = this.state;
+
+        if (isUpdating) {
+            return <Loader text={"Updating user..."} />
+        }
         return (
             <>
                 <div className="row">
