@@ -22,7 +22,6 @@ class EditUser extends Component {
             })
     }
 
-
     updateUser = (body) => {
         const id = this.props.match.params.id;
         userService.updateUser(id, body)
@@ -30,9 +29,6 @@ class EditUser extends Component {
                 this.props.history.push("/")
             })
     }
-
-
-
 
     render() {
         const { user } = this.state;

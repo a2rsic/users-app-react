@@ -7,7 +7,10 @@ class UserForm extends Component {
         this.state = {
             name: "",
             email: "",
-            error: null
+            error: {
+                name: null,
+                email: null
+            }
         };
     }
 
@@ -17,6 +20,7 @@ class UserForm extends Component {
             const { user } = this.props;
             const name = user ? user.name : "";
             const email = user ? user.email : ""
+
             this.setState({
                 name,
                 email
@@ -25,8 +29,17 @@ class UserForm extends Component {
     }
 
     onInputChange = (e) => {
+        const { name, value } = e.target;
+
+
+        const error = {
+            ...this.state.error,
+            [name]: this.validateInput(name, value)
+        }
+
         this.setState({
-            [e.target.name]: e.target.value
+            [name]: value,
+            error
         });
     }
 
@@ -37,15 +50,34 @@ class UserForm extends Component {
         }
     }
 
-    isValid = () => {
-        let error = null
-        const name = this.state.name;
-        const email = this.state.email;
+    validateInput = (name, value) => {
+        if (name === "name") {
+            return this.isValidName(value)
+        }
 
-        if (name.length < 3 && name.length > 30) {
-            error = "Invalid name";
-        } else if (email.length < 3 && email.length > 30 && !email.includes("@")) {
-            error = "Invalid email"
+        if (name === "email") {
+            return this.isValidEmail(value)
+        }
+
+        return null
+    }
+
+    isValidName = (name) => {
+        let error = null
+        if (name.length < 3 || name.length > 30) {
+            error = "Name must be between 3 anf 30 charachters";
+        }
+
+        return error
+    }
+
+    isValidEmail = (email) => {
+        let error = null
+
+        if (email.length < 3 || email.length > 30) {
+            error = "Email must be between 3 anf 30 charachters"
+        } else if (!email.includes("@")) {
+            error = "Invalid email format"
         }
 
         return error;
@@ -53,40 +85,24 @@ class UserForm extends Component {
 
     onClickCreate = (e) => {
         e.preventDefault();
-        const error = this.isValid()
-        if (error) {
-            alert(error)
-            return
-        }
-
         const body = this.getDataBody()
         this.props.onUserCreate(body)
     }
 
     onClickUpdate = (e) => {
         e.preventDefault();
-        const error = this.isValid()
-        if (error) {
-            alert(error)
-            return
-        }
-
         const body = this.getDataBody()
         this.props.onUserUpdate(body)
     }
 
-    renderError = () => {
-        const { error } = this.state;
-        return (
-            <>
-                {!error && <h6 className="error red-text">{error}</h6>}
-            </>
-        )
-    }
-
     renderActionButtons = () => {
 
-        const disabled = this.state.error ? "disabled" : ""
+        const { error, name, email } = this.state;
+
+        const isEmpty = name.length === 0 || email.length === 0
+        const isValid = !error.name && !error.email
+
+        const disabled = isValid ? "" : "disabled"
 
         return (
             <>
@@ -95,7 +111,7 @@ class UserForm extends Component {
                         onClick={this.onClickCreate}
                         type="button"
                         value="Create"
-                        className={`btn ${disabled}`} />}
+                        className={`btn  ${isEmpty ? "disabled" : disabled}`} />}
                 {this.props.onUserUpdate &&
                     <input
                         onClick={this.onClickUpdate}
@@ -107,37 +123,37 @@ class UserForm extends Component {
     }
 
     render() {
-
+        const { name, email, error } = this.state;
         return (
             <div className="col s12">
                 <div className="row">
                     <div className="input-field col s12">
                         <input
                             onChange={this.onInputChange}
-                            value={this.state.name}
+                            value={name}
                             name="name"
                             placeholder="Name"
                             autoComplete="off"
                             id="name"
                             type="text"
                             className="validate" />
-
+                        {error.name && <h6 className="error red-text">{error.name}</h6>}
                     </div>
                 </div>
                 <div className="row">
                     <div className="input-field col s12">
                         <input
                             onChange={this.onInputChange}
-                            value={this.state.email}
+                            value={email}
                             placeholder="Email"
                             autoComplete="off"
                             id="email"
                             name="email"
                             type="email"
                             className="validate" />
+                        {error.email && <h6 className="error red-text">{error.email}</h6>}
                     </div>
                 </div>
-                {this.renderError()}
                 {this.renderActionButtons()}
             </div>
         )
